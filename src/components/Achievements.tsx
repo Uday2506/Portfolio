@@ -4,7 +4,7 @@ import RevealText from './RevealText'
 
 export default function Achievements() {
   return (
-    <section id="achievements" className="mx-auto max-w-7xl px-6 py-28 sm:px-10 sm:py-36">
+    <section id="achievements" className="mx-auto max-w-7xl px-6 py-16 sm:px-10 sm:py-24">
       <div className="mb-4 flex items-center gap-4">
         <span className="font-mono text-xs uppercase tracking-[0.3em] text-gold">05 / Milestones</span>
         <span className="h-px flex-1 bg-paper/10" />

@@ -3,11 +3,13 @@ import { skills, skillsFootnote } from '../data/resume'
 import RevealText from './RevealText'
 import Marquee from './Marquee'
 
-const allSkills = skills.flatMap((g) => g.items)
+// The asterisk is a footnote marker that only makes sense next to the footnote,
+// so it's stripped for the decorative marquee.
+const allSkills = skills.flatMap((g) => g.items).map((item) => item.replace('*', ''))
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-28 sm:py-36">
+    <section id="skills" className="py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 sm:px-10">
         <div className="mb-4 flex items-center gap-4">
           <span className="font-mono text-xs uppercase tracking-[0.3em] text-gold">03 / System Matrix</span>

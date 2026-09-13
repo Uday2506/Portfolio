@@ -5,7 +5,7 @@ import Portrait from './Portrait'
 
 export default function About() {
   return (
-    <section id="about" className="mx-auto max-w-7xl px-6 py-28 sm:px-10 sm:py-36">
+    <section id="about" className="mx-auto max-w-7xl px-6 py-16 sm:px-10 sm:py-24">
       <div className="mb-4 flex items-center gap-4">
         <span className="font-mono text-xs uppercase tracking-[0.3em] text-gold">01 / About Me</span>
         <span className="h-px flex-1 bg-paper/10" />
@@ -58,7 +58,7 @@ export default function About() {
           transition={{ duration: 0.7 }}
           className="mx-auto w-full max-w-xs"
         >
-          <Portrait />
+          <Portrait src="/profile-side.jpg" />
         </motion.div>
       </div>
     </section>

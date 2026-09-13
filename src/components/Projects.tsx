@@ -57,20 +57,15 @@ function ProjectCard({ project, index }: { project: ProjectItem; index: number }
               ))}
             </dl>
 
-            {repo ? (
+            {repo && (
               <a
                 href={repo}
                 target="_blank"
                 rel="noreferrer"
-                data-cursor-hover
                 className="mt-6 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.15em] text-gold hover:underline"
               >
                 View on GitHub ↗
               </a>
-            ) : (
-              <span className="mt-6 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.15em] text-paper/30">
-                Repo link coming soon
-              </span>
             )}
           </div>
         </div>
@@ -81,7 +76,7 @@ function ProjectCard({ project, index }: { project: ProjectItem; index: number }
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-28 sm:py-36">
+    <section id="projects" className="py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 sm:px-10">
         <div className="mb-4 flex items-center gap-4">
           <span className="font-mono text-xs uppercase tracking-[0.3em] text-gold">02 / Featured Work</span>

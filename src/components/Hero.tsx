@@ -13,13 +13,8 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-[100svh] items-center overflow-hidden px-6 py-24 sm:px-10"
+      className="relative flex min-h-[85svh] items-center overflow-hidden px-6 py-16 sm:px-10 sm:py-20"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-32 right-0 h-[34rem] w-[34rem] rounded-full bg-gold/10 blur-[130px]"
-      />
-
       <div className="mx-auto grid w-full max-w-7xl items-center gap-16 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
           <motion.p
@@ -31,11 +26,20 @@ export default function Hero() {
             {profile.eyebrow}
           </motion.p>
 
-          <h1 className="font-display text-clamp1 uppercase leading-[0.94] tracking-tight">
-            {['I build systems.', 'I run events.'].map((line, i) => (
+          <motion.h1
+            initial={reduce ? undefined : { opacity: 0, y: 16 }}
+            animate={reduce ? undefined : { opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+            className="block overflow-hidden font-display text-[clamp(2.75rem,9vw,6.5rem)] uppercase leading-[0.9] tracking-tight text-paper"
+          >
+            Uday <span className="text-gold">Kiran</span>
+          </motion.h1>
+
+          <div className="mt-3 font-display text-clamp2 uppercase leading-[0.94] tracking-tight">
+            {['I build.', 'I lead.', 'I create impact.'].map((line, i) => (
               <span key={line} className="block overflow-hidden">
                 <motion.span
-                  className={`block ${i === 1 ? 'text-gold' : 'text-paper'}`}
+                  className={`block ${i === 2 ? 'text-gold' : 'text-paper'}`}
                   initial={reduce ? undefined : { y: '100%' }}
                   animate={reduce ? undefined : { y: '0%' }}
                   transition={{ duration: 0.9, delay: 0.1 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
@@ -44,7 +48,7 @@ export default function Hero() {
                 </motion.span>
               </span>
             ))}
-          </h1>
+          </div>
 
           <motion.p
             initial={reduce ? undefined : { opacity: 0, y: 16 }}
@@ -76,13 +80,15 @@ export default function Hero() {
             >
               Explore My Work ↗
             </button>
-            <a
-              href={links.resumePdf}
-              download
-              className="inline-flex items-center gap-2 rounded-full border border-paper/25 px-7 py-3.5 font-mono text-xs uppercase tracking-[0.2em] text-paper transition-colors hover:border-gold hover:text-gold"
-            >
-              Download Resume
-            </a>
+            {links.resumePdf && (
+              <a
+                href={links.resumePdf}
+                download
+                className="inline-flex items-center gap-2 rounded-full border border-paper/25 px-7 py-3.5 font-mono text-xs uppercase tracking-[0.2em] text-paper transition-colors hover:border-gold hover:text-gold"
+              >
+                Download Resume
+              </a>
+            )}
           </motion.div>
         </div>
 
@@ -92,19 +98,9 @@ export default function Hero() {
           transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="mx-auto w-full max-w-sm"
         >
-          <Portrait tag="B. Uday Kiran" />
+          <Portrait src="/profile-straight.jpg" tag="Uday Kiran" />
         </motion.div>
       </div>
-
-      <motion.div
-        initial={reduce ? undefined : { opacity: 0 }}
-        animate={reduce ? undefined : { opacity: 1 }}
-        transition={{ duration: 0.8, delay: 1.2 }}
-        className="absolute bottom-8 left-6 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-paper/40 sm:left-10"
-      >
-        <span className="h-9 w-[1px] bg-paper/30" />
-        Scroll
-      </motion.div>
     </section>
   )
 }

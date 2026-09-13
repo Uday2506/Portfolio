@@ -1,5 +1,5 @@
 import Nav from './components/Nav'
-import Cursor from './components/Cursor'
+import Background from './components/Background'
 import Hero from './components/Hero'
 import About from './components/About'
 import Experience from './components/Experience'
@@ -15,15 +15,15 @@ function App() {
       <a href="#top" className="skip-link">
         Skip to content
       </a>
+      <Background />
       <div className="grain" />
-      <Cursor />
       <Nav />
       <main>
         <Hero />
         <About />
-        <Experience />
         <Projects />
         <Skills />
+        <Experience />
         <Achievements />
         <Education />
         <Contact />

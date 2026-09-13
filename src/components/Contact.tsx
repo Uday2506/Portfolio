@@ -1,7 +1,29 @@
 import { useState, type FormEvent } from 'react'
 import { motion } from 'framer-motion'
-import { links } from '../data/links'
+import { links, whatsappLink } from '../data/links'
+import { profile } from '../data/resume'
 import RevealText from './RevealText'
+import {
+  FacebookIcon,
+  GithubIcon,
+  InstagramIcon,
+  LinkedinIcon,
+  MediumIcon,
+  WhatsappIcon,
+  XIcon,
+  YoutubeIcon,
+} from './SocialIcons'
+
+const socialLinks = [
+  { label: 'Facebook', href: links.facebook, Icon: FacebookIcon },
+  { label: 'YouTube', href: links.youtube, Icon: YoutubeIcon },
+  { label: 'Medium', href: links.medium, Icon: MediumIcon },
+  { label: 'Instagram', href: links.instagram, Icon: InstagramIcon },
+  { label: 'X', href: links.twitter, Icon: XIcon },
+  { label: 'WhatsApp', href: whatsappLink, Icon: WhatsappIcon },
+  { label: 'LinkedIn', href: links.linkedin, Icon: LinkedinIcon },
+  { label: 'GitHub', href: links.github, Icon: GithubIcon },
+].filter((s) => s.href)
 
 export default function Contact() {
   const year = new Date().getFullYear()
@@ -17,13 +39,13 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="mx-auto max-w-6xl px-6 py-28 sm:px-10 sm:py-40">
+    <section id="contact" className="mx-auto max-w-6xl px-6 py-16 sm:px-10 sm:py-24">
       <div className="mb-4 flex items-center gap-4">
         <span className="font-mono text-xs uppercase tracking-[0.3em] text-gold">07 / Contact</span>
         <span className="h-px flex-1 bg-paper/10" />
       </div>
 
-      <div className="grid gap-14 lg:grid-cols-[1fr_1fr] lg:items-start">
+      <div className="grid gap-14 lg:grid-cols-[1fr_1fr] lg:items-center">
         <div>
           <RevealText as="h2" className="font-display text-clamp1 uppercase leading-[0.92]">
             <span className="block text-paper">Establish</span>
@@ -40,33 +62,6 @@ export default function Contact() {
             Open to internships and roles where shipping software and running operations both matter. Based in{' '}
             {links.location} — happy to work remote or on-site.
           </motion.p>
-
-          <div className="mt-12 flex flex-wrap gap-x-10 gap-y-4 border-t border-paper/10 pt-8 font-mono text-sm">
-            <a href={`mailto:${links.email}`} className="text-paper/70 hover:text-gold">
-              {links.email}
-            </a>
-            <a href={`tel:${links.phone}`} className="text-paper/70 hover:text-gold">
-              {links.phone}
-            </a>
-          </div>
-          <div className="mt-4 flex flex-wrap gap-x-10 gap-y-4 font-mono text-sm">
-            <a
-              href={links.github || undefined}
-              target={links.github ? '_blank' : undefined}
-              rel="noreferrer"
-              className={links.github ? 'text-paper/70 hover:text-gold' : 'text-paper/25'}
-            >
-              GitHub {links.github ? '↗' : '(coming soon)'}
-            </a>
-            <a
-              href={links.linkedin || undefined}
-              target={links.linkedin ? '_blank' : undefined}
-              rel="noreferrer"
-              className={links.linkedin ? 'text-paper/70 hover:text-gold' : 'text-paper/25'}
-            >
-              LinkedIn {links.linkedin ? '↗' : '(coming soon)'}
-            </a>
-          </div>
         </div>
 
         <motion.form
@@ -81,6 +76,7 @@ export default function Contact() {
             <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-gold/80">// Sender</span>
             <input
               required
+              aria-label="Your name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter name"
@@ -93,6 +89,7 @@ export default function Contact() {
             <input
               required
               type="email"
+              aria-label="Your email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter email"
@@ -104,6 +101,7 @@ export default function Contact() {
             <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-gold/80">// Payload</span>
             <textarea
               required
+              aria-label="Your message"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Enter transmission payload..."
@@ -121,8 +119,34 @@ export default function Contact() {
         </motion.form>
       </div>
 
-      <footer className="mt-24 flex flex-col gap-2 border-t border-paper/10 pt-8 font-mono text-xs text-paper/35 sm:flex-row sm:items-center sm:justify-between">
-        <span>© {year} Battula Uday Kiran. All rights reserved.</span>
+      {socialLinks.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6 }}
+          className="mt-20 border-t border-paper/10 pt-10"
+        >
+          <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-paper/40">// Connect</p>
+          <div className="mt-5 flex flex-wrap gap-3">
+            {socialLinks.map(({ label, href, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-paper/20 text-paper/70 transition-colors hover:border-gold hover:text-gold"
+              >
+                <Icon className="h-5 w-5" />
+              </a>
+            ))}
+          </div>
+        </motion.div>
+      )}
+
+      <footer className="mt-12 flex flex-col gap-2 border-t border-paper/10 pt-8 font-mono text-xs text-paper/35 sm:flex-row sm:items-center sm:justify-between">
+        <span>© {year} {profile.name}. All rights reserved.</span>
         <button
           onClick={() => document.getElementById('top')?.scrollIntoView({ behavior: 'smooth' })}
           className="text-left hover:text-gold sm:text-right"

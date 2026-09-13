@@ -3,31 +3,36 @@ import { useState } from 'react'
 type Props = {
   className?: string
   tag?: string
+  src: string
 }
 
-// A gold-framed, spotlit portrait slot. Drop a real photo at public/profile.jpg
-// and it renders there automatically; until then it falls back to a
-// typographic monogram so the layout never depends on a photo that doesn't exist.
-export default function Portrait({ className = '', tag }: Props) {
+// A gold-framed, spotlit portrait slot. Pass the photo path via `src` — the
+// same border, glow, and hover treatment applies wherever this is used, so
+// every portrait on the site reads as one consistent design. Falls back to a
+// typographic monogram if that file is missing, so the layout never breaks.
+export default function Portrait({ className = '', tag, src }: Props) {
   const [imgFailed, setImgFailed] = useState(false)
 
   return (
     <div className={`relative ${className}`}>
-      <div
-        aria-hidden="true"
-        className="absolute -inset-10 -z-10 rounded-full bg-gold/15 blur-[80px]"
-      />
-      <div className="grid-pattern relative overflow-hidden rounded-2xl border border-gold/40 bg-surface">
+      {/* Glow is inset-0 rather than bleeding outward: a larger box would widen
+          the page's scroll area on narrow screens. The blur still paints a halo
+          outside the card, and painted overflow doesn't affect layout. */}
+      <div aria-hidden="true" className="absolute inset-0 -z-10 rounded-full bg-gold/25 blur-[80px]" />
+      <div className="grid-pattern relative overflow-hidden rounded-2xl border border-gold/40 bg-surface transition-colors duration-300 hover:border-gold/70">
         {!imgFailed ? (
           <img
-            src="/profile.jpg"
-            alt="Battula Uday Kiran"
-            className="aspect-[3/4] w-full object-cover"
+            src={src}
+            alt="Uday Kiran"
+            className="aspect-[3/4] w-full object-cover transition-transform duration-500 hover:scale-[1.03]"
             onError={() => setImgFailed(true)}
           />
         ) : (
           <div className="flex aspect-[3/4] w-full flex-col items-center justify-center gap-3 p-8 text-center">
-            <span className="font-display text-6xl leading-none text-gold/90 sm:text-7xl">B.U.K</span>
+            <span className="font-display leading-[0.95] text-gold/90">
+              <span className="block text-4xl sm:text-5xl">UDAY</span>
+              <span className="block text-4xl sm:text-5xl">KIRAN</span>
+            </span>
             <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-paper/35">
               Photo coming soon
             </span>

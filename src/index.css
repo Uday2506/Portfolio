@@ -89,15 +89,6 @@ button:focus-visible {
   left: 0;
 }
 
-/* Custom cursor (desktop only, applied via JS toggling body class) */
-.cursor-enabled {
-  cursor: none;
-}
-.cursor-enabled a,
-.cursor-enabled button {
-  cursor: none;
-}
-
 .marquee-track {
   display: flex;
   width: max-content;

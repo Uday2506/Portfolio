@@ -4,7 +4,7 @@ import RevealText from './RevealText'
 
 export default function Education() {
   return (
-    <section id="education" className="mx-auto max-w-5xl px-6 py-28 sm:px-10 sm:py-36">
+    <section id="education" className="mx-auto max-w-5xl px-6 py-16 sm:px-10 sm:py-24">
       <div className="mb-4 flex items-center gap-4">
         <span className="font-mono text-xs uppercase tracking-[0.3em] text-gold">06 / Education</span>
         <span className="h-px flex-1 bg-paper/10" />
@@ -41,8 +41,10 @@ export default function Education() {
               )}
             </div>
             <div className="text-left sm:text-right">
-              <p className="font-display text-xl text-gold">{e.detail}</p>
-              <p className="mt-1 font-mono text-xs uppercase tracking-wide text-paper/45">{e.date}</p>
+              {e.detail && <p className="font-display text-xl text-gold">{e.detail}</p>}
+              <p className="mt-1 whitespace-nowrap font-mono text-xs uppercase tracking-wide text-paper/45">
+                {e.date}
+              </p>
             </div>
           </motion.div>
         ))}
